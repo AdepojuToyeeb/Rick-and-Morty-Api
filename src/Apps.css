@@ -1,0 +1,30 @@
+.App {
+  color: white;
+  margin: 0 auto;
+  max-width: 1260px;
+  min-height: 500px;
+}
+
+.Header {
+  text-align: center;
+  color: #443e3e  ;
+  text-shadow: 1px 1px 5px #fff;
+}
+
+.card-parent {
+  color:black;
+  background-color: white;
+  border: 1em solid white;
+  margin: 2em; 
+}
+.header-bar{
+  text-align: center;
+  color: black;
+  font-size: 2rem;
+  width: 100%;
+}
+.grid{
+  display:flex;
+  flex-wrap: wrap;
+  padding-left: 40px;
+}

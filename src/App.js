@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./Apps.css";
+import axios from 'axios';
+import Header from './Components/Header/Header'
+import CardGrid from './Components/Cards/CardGrid'
 
-function App() {
+
+const App = () => {
+  const [character, setCharacter] = useState(0);
+
+  useEffect(() => {
+    const fetchCharacter = async () => {
+      return await axios.get(
+        "https://rickandmortyapi.com/api/character/"
+      );
+    };
+
+    fetchCharacter()
+      .then(res => {
+        setCharacter(res.data);
+      })
+      .catch(err => {
+        console.log("Error has occurred: ", err);
+      });
+  },[]);
+
+  // console.log(character);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      {character ? <CardGrid character={character.results} /> : null}
     </div>
   );
-}
+};
 
 export default App;
