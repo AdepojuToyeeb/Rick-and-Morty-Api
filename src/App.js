@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import "./Apps.css";
-import axios from 'axios';
-import Header from './Components/Header/Header'
-import CardGrid from './Components/Cards/CardGrid'
+  import React, { useState, useEffect } from "react";
+  import "./Apps.css";
+  import axios from 'axios';
+  import Header from './Components/Header/Header'
+  import CardGrid from './Components/Cards/CardGrid'
 
 
 const App = () => {
   const [character, setCharacter] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCharacter = async () => {
@@ -18,20 +19,27 @@ const App = () => {
     fetchCharacter()
       .then(res => {
         setCharacter(res.data);
+        setIsLoading (false);
       })
       .catch(err => {
         console.log("Error has occurred: ", err);
       });
   },[]);
 
-  // console.log(character);
-  
+  if (isLoading) {
+    return (
+      <h1 className="header-bar"> Loading...</h1>
+    )
+  }
+
+
   return (
     <div className="App">
       <Header />
-      {character ? <CardGrid character={character.results} /> : null}
+      <CardGrid character={character.results} />
     </div>
   );
 };
 
 export default App;
+
